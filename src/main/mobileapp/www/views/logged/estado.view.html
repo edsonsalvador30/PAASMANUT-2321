@@ -1,0 +1,58 @@
+<ion-view cache-view="false" view-title="Estado" hide-back-button="true">
+  <ion-nav-buttons side="right"> 
+    <button class="button button-stable" ng-hide="Estado.inserting || Estado.editing" ng-click="Estado.startInserting()"> <i class="icon ion-plus-round"></i> </button>
+    <button class="button button-stable" ng-show="Estado.inserting || Estado.editing" ng-click="Estado.post()"> <i class="icon ion-checkmark"></i> </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-hide="Estado.inserting || Estado.editing" menu-toggle="left"> </button>
+    <button class="button button-stable" ng-show="Estado.inserting || Estado.editing" ng-click="Estado.cancel()"> <i class="icon ion-android-arrow-back"></i> </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div ng-hide="Estado.inserting || Estado.editing" data-component="crn-datasource-filter" id="crn-datasource-filter-general" class="">
+      <label class="item item-input" id="cloud-search1">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text"  ng-model="vars.search" cronapp-filter="nom_estado;" cronapp-filter-operator="" cronapp-filter-autopost="true" crn-datasource="Estado" value="" placeholder="{{'template.crud.search' | translate}}">
+      </label>
+    </div>   
+    <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-906854">
+      <datasource  name="Estado" entity="api/cronapi/crud/app.entity.Estado" keys="id" rows-per-page="10" delete-message="Deseja remover?" class=""></datasource>
+    </div>
+    <div crn-datasource="Estado" class="" ng-hide="Estado.editing || Estado.inserting">
+      <ion-list can-swipe="listCanSwipe">
+        <ion-item ng-repeat="rowData in datasource.data" class="item" ng-click="datasource.startEditing(rowData)">
+          <div class="row">
+            <div class="col">
+              {{rowData.nom_estado}}
+            </div>
+          </div>
+          <ion-option-button class="button-positive" ng-click="datasource.startEditing(rowData)">
+            <i class="icon ion-edit"></i>
+          </ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="datasource.remove(rowData)">
+            &nbsp;
+            <i class="icon ion-trash-a"></i>
+          </ion-option-button>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div ng-show="Estado.editing || Estado.inserting">
+      <form crn-datasource="Estado">
+        <fieldset ng-disabled="!Estado.editing &amp;&amp; !Estado.inserting">
+          <div class="list">
+            <!-- nom_estado begin -->
+            <label for="textinput-nom_estado" class="item item-input item-stacked-label">
+            <span class="input-label">Nome Estado</span>
+            <input
+            type="text"
+            placeholder="Nome Estado"
+            ng-model="Estado.active.nom_estado"
+            id="textinput-nom_estado"
+            name="textinput-nom_estado"
+            >
+            </label>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

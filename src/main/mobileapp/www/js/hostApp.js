@@ -1,0 +1,1 @@
+window.hostApp = 'https://27-113-10060.debug.ide.cronapp.io/';
